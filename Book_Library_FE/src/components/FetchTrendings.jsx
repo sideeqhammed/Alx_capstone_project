@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 
 function Trendings() {
 
-  const [subjects, setSubjects] = useState('')
   const [trendings, setTrendings] = useState([])
   const [loading, setLoading] = useState(false)
 
@@ -31,14 +30,7 @@ function Trendings() {
     <div className="text-center">
       <hr />
       <h1 className="my-10">Trendings</h1>
-      <div className="block mt-5">
-        <label>Choose a Genre: </label>
-        <select name='search_option' value={subjects} onChange={(e) => setSubjects(e.target.value)} className="border-2 rounded-sm">
-          <option value='title'>Book Title</option>
-          <option value='author'>Author</option>
-          <option value='first_publish_year'>First publish year</option>
-        </select>
-      </div>
+      
       {loading ? <LoadingIndicator /> : 
         <div className="flex flex-wrap justify-center">
           {console.log(trendings)}
