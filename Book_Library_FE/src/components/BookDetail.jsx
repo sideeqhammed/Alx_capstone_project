@@ -38,7 +38,7 @@ function BookDetail() {
           <div className="text-black p-5 px-5">
             {console.log(book, book.covers)}
             <h1 className="text-3xl mb-5">{book.title}</h1>
-            <h2>by {</h2>
+            
             <p className="font-bold">Work Description:</p>
             <p className="mb-3">{typeof book.description === 'string' ?
               book.description.split('(').shift() :
