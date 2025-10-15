@@ -38,7 +38,7 @@ function Homepage() {
   return(
     <div className="bg-amber-50 text-center text-black p-10 mx-10 rounded-lg">
       <h1 className="font-bold">Book Library</h1>
-      <form onSubmit={search} className="mb-50">
+      <form onSubmit={search} className="mb-10">
         <div className="block mt-5">
           <label>Search using: </label>
           <select name='search_option' value={searchOption} onChange={(e) => setSearchOption(e.target.value)} className="border-2 rounded-sm">
@@ -54,30 +54,31 @@ function Homepage() {
       </form>
       
       {loading ? <LoadingIndicator /> : ''}
-
+      <div className="flex flex-wrap justify-center">
       {books && books.length > 0 ? 
         books.map((book, index) => (
           <div 
             key={index}
-            className="bg-amber-100 my-5 mx-10 p-4 text-left flex flex-wrap md:flex-nowrap md:w-3/4"
+            className="bg-amber-100 my-5 mx-10 p-2 w-50 rounded-2xl"
           >
             <Link to={`/book/${book.key.split('/').pop()}`}>
               <img src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`} 
                 alt={`Cover of:${book.title}`} 
                 onError={(e) => (e.target.src = 'https://dreieck.com/en/wp-content/uploads/sites/2/2023/03/opened-book-06-adding-another-outline-850x638.png')}
-                className="w-30 mr-3 mb-2"
+                className="mr-3 mb-2 mx-auto h-60 rounded-lg"
               />
             </Link>
-            <div>
-            <Link to={`/book/${book.key.split('/').pop()}`}><p>{book.title}</p></Link>
-            <Link to={`/book/${book.key.split('/').pop()}`}><p>by {book.author_name}</p></Link>
-            <p>First publised in - {book.first_publish_year}</p>
+            <div className="px-3">
+            <Link to={`/book/${book.key.split('/').pop()}`}><p className="text-lg mb-3">{book.title}</p></Link>
+            <Link to={`/book/${book.key.split('/').pop()}`}><p className="mb-3">by {book.author_name}</p></Link>
+            <p className="text-sm">First publised in - {book.first_publish_year}</p>
             <p></p>
             </div>
           </div>
         )) 
         : <Trendings />
       } 
+      </div>
 
       {error ? <p className="text-red-600">{error}</p> : ''}
     </div>
