@@ -1,6 +1,8 @@
 import { useState } from "react"
 import SearchBook from "./SearchResult"
 
+import { Link } from "react-router"
+
 function Homepage() {
   const [bookName, setBookName] = useState('')
   const [books, setBooks] = useState([])
@@ -29,6 +31,8 @@ function Homepage() {
       setLoading(false)
     }
   }
+
+
   return(
     <div className="bg-amber-50 text-center">
       <h1>Home</h1>
@@ -55,15 +59,18 @@ function Homepage() {
             key={index}
             className="bg-amber-100 my-5 mx-10 p-4 text-left flex flex-wrap md:flex-nowrap md:w-3/4"
           >
-            <img src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`} 
-              alt={`Cover of:${book.title}`} 
-              onError={(e) => (e.target.src = 'https://dreieck.com/en/wp-content/uploads/sites/2/2023/03/opened-book-06-adding-another-outline-850x638.png')}
-              className="w-30 mr-3 mb-2"
-            />
+            <Link to={`/book/${book.key.split('/').pop()}`}>
+              <img src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`} 
+                alt={`Cover of:${book.title}`} 
+                onError={(e) => (e.target.src = 'https://dreieck.com/en/wp-content/uploads/sites/2/2023/03/opened-book-06-adding-another-outline-850x638.png')}
+                className="w-30 mr-3 mb-2"
+              />
+            </Link>
             <div>
-            <p>{book.title}</p>
-            <p>by {book.author_name}</p>
+            <Link to={`/book/${book.key.split('/').pop()}`}><p>{book.title}</p></Link>
+            <Link to={`/book/${book.key.split('/').pop()}`}><p>by {book.author_name}</p></Link>
             <p>First publised in - {book.first_publish_year}</p>
+            <p></p>
             </div>
           </div>
         )) 
