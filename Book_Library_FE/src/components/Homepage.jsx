@@ -1,6 +1,6 @@
 import { useState } from "react"
 import SearchBook from "./SearchResult"
-
+import LoadingIndicator from "./Loading"
 import { Link } from "react-router"
 
 function Homepage() {
@@ -34,7 +34,7 @@ function Homepage() {
 
 
   return(
-    <div className="bg-amber-50 text-center">
+    <div className="bg-amber-50 text-center text-black">
       <h1>Home</h1>
       <form onSubmit={search}>
         <div className="block mt-5">
@@ -51,7 +51,7 @@ function Homepage() {
         <button type="submit" className="border-2 m-3 px-3 py-2 bg-amber-200">Search</button>
       </form>
       
-      {loading ? <p>Loading...</p> : ''}
+      {loading ? <LoadingIndicator /> : ''}
 
       {books && books.length > 0 ? 
         books.map((book, index) => (
