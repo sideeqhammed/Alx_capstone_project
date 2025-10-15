@@ -7,6 +7,7 @@ function BookDetail() {
 
   const { id } = useParams()
   const [book, setBook] = useState({})
+  const [authorName, setAuthorName] = useState('')
   const [loading, setLoading] = useState(true)
   const [isExpanded, setIsExpanded] = useState(false)
   const subjects  = book.subjects ?
@@ -18,6 +19,12 @@ function BookDetail() {
       try {
         const response = await axios.get(`https://openlibrary.org/works/${id}.json`)
         setBook(response.data)
+
+        if(response.data.authors?.length > 0) {
+          const authorKey = response.data.authors[0].author.key
+          const authorRes = await axios.get(`https://openlibrary.org${authorKey}.json`)
+          setAuthorName(authorRes.data.name)
+        }
       } catch (err) {
         console.log(err)
       } finally {
@@ -44,10 +51,10 @@ function BookDetail() {
             />
 
             <div className="text-black p-5 px-5">
-              {console.log(book, book.covers)}
+              {console.log(book, book.covers, book.authors[0].author.key)}
               <h1 className="text-3xl mb-3">{book.title}</h1>
 
-              <h2 className="text-xl mb-5">by</h2>
+              <h2 className="text-xl mb-5">by {authorName}</h2>
               
               <p className="font-bold">Work Description:</p>
               <p className="mb-3">{typeof book.description === 'string' ?

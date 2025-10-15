@@ -7,8 +7,8 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 function App() {
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/book/:id' element={<BookDetail />} />
