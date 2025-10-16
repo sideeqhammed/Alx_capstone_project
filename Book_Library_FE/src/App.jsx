@@ -3,7 +3,7 @@ import Header from './components/Header'
 import Homepage from './components/Homepage'
 import BookDetail from './components/BookDetail'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import AuthorWorks from './components/AuthorWorks'
+import Contact from './components/Contact'
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/book/:id' element={<BookDetail />} />
-          <Route path='/author/:id' element={<AuthorWorks />} />
+          <Route path='/contact_us' element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </>

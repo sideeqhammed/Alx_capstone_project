@@ -36,7 +36,7 @@ function Homepage() {
 
 
   return(
-    <div className="bg-gray-50 min-h-screen text-black text-center p-5 sm:p-10 md:mx-10 xl:mx-20 rounded-xl shadow-2xl">
+    <div className="bg-gray-50 min-h-screen text-black text-center p-5 sm:p-10  rounded-xl shadow-2xl">
       <h1 className="text-4xl font-extrabold mb-8 text-amber-700">Book Library</h1>
       <form onSubmit={search} className="mb-12 bg-white p-6 rounded-xl shadow-lg max-w-xl mx-auto border border-amber-200">
         <div className="flex items-center justify-center space-x-3">

@@ -8,7 +8,7 @@ function Header() {
       <ul className="flex ">
         {/* <li className="mr-5 text-blue-500"><Link to={'/'}>Search</Link></li> */}
         {/* <li className="mr-5"><a>Favourites</a></li> */}
-        <li className="mr-5"><a className="text-base text-gray-700 hover:text-amber-500 transition-colors duration-200 cursor-pointer ">Contact Us</a></li>
+        <li className="mr-5"><Link to={'/contact_us'} className="text-base text-gray-700 hover:text-amber-500 transition-colors duration-200 cursor-pointer ">Contact Us</Link></li>
       </ul>
     </div>
   )
