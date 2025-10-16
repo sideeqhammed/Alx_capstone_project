@@ -47,6 +47,7 @@ function Homepage() {
           >
             <option value='title'>Book Title</option>
             <option value='author'>Author</option>
+            <option value='isbn'>ISBN</option>
             <option value='first_publish_year'>First publish year</option>
           </select>
         </div>
@@ -56,7 +57,10 @@ function Homepage() {
         <button type="submit" className="w-full mt-3 bg-amber-400 hover:bg-amber-500 text-white font-bold py-2 rounded-md transition-colors">Search</button>
       </form>
 
-      {error ? <p className="w-full max-w-xl mx-auto mt-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded-lg shadow-md font-medium">{error}</p> : ''}
+      {error ? 
+        <p className="w-full max-w-xl mx-auto mt-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded-lg shadow-md font-medium">{error}</p> 
+        : ''
+      }
       
       {loading ? <LoadingIndicator /> : ''}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 justify-items-center">

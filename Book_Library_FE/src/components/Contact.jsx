@@ -23,7 +23,6 @@ function Contact() {
         {submitted && (
           <p className="mb-4 text-green-600 font-semibold">
             ✅ Message sent!
-            .
           </p>
         )}
 

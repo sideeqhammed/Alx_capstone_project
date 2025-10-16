@@ -15,10 +15,10 @@ function Trendings() {
       try {
         setLoading(true)
         const response = await axios.get(`https://openlibrary.org/trending/now.json?limit=20`)
-        console.log(response.data)
+        // console.log(response.data)
         setTrendings(response.data.works)
       } catch(err) {
-        console.log(err)
+        // console.log(err)
       } finally {
         setLoading(false)
       }
@@ -33,7 +33,7 @@ function Trendings() {
       
       {loading ? <LoadingIndicator /> : 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 justify-items-center">
-          {console.log(trendings)}
+          {/* {console.log(trendings)} */}
           {trendings ? 
             trendings.map((trending, index) => (
               <div 
@@ -41,7 +41,7 @@ function Trendings() {
                 className="flex flex-col items-center bg-amber-50 border border-amber-200 p-4 rounded-xl shadow-xl 
                 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02] w-full max-w-xs"
               >
-                {console.log(trending)}
+                {/* {console.log(trending)} */}
                 <Link to={`/book/${trending.key.split('/').pop()}`}>
                   <img src={`https://covers.openlibrary.org/b/id/${trending.cover_i}-M.jpg`} 
                     alt={`Cover of:${trending.title}`} 

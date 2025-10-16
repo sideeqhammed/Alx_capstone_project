@@ -32,10 +32,10 @@ function BookDetail() {
         if (editions.length > 0) {
           const firstEdition = editions[0]
           setPages(firstEdition.number_of_pages)
-          console.log(firstEdition.number_of_pages)
+          // console.log(firstEdition.number_of_pages)
 }
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       } finally {
         setLoading(false)
       }
@@ -60,7 +60,7 @@ function BookDetail() {
             />
 
             <div className="text-black p-5 px-5">
-              {console.log(book, book.covers, book.authors[0].author.key)}
+              {/* {console.log(book, book.covers, book.authors[0].author.key)} */}
               <h1 className="text-3xl mb-3">{book.title}</h1>
 
               <h2 className="text-xl mb-5">by {authorName}</h2>
