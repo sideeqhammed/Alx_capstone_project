@@ -1,6 +1,6 @@
 const LoadingIndicator = () => {
   return (
-    <div className="flex flex-col items-center justify-center p-8 bg-white rounded-xl shadow-lg">
+    <div className="flex flex-col items-center justify-center p-10 bg-white rounded-xl shadow-2xl border border-amber-200">
       
       {/* The Spinner Element: 
         - w-12 h-12: Sets the width and height.
@@ -10,11 +10,11 @@ const LoadingIndicator = () => {
         - rounded-full: Makes it a perfect circle.
         - animate-spin: Applies the custom Tailwind animation utility.
       */}
-      <div className="w-12 h-12 border-4 border-gray-200 border-t-blue-500 rounded-full animate-spin">
+      <div className="w-14 h-14 border-4 border-gray-200 border-t-amber-500 rounded-full animate-spin">
       </div>
 
       {/* Loading Text */}
-      <p className="mt-4 text-lg text-gray-700">
+      <p className="mt-5 text-xl font-semibold text-gray-700">
         Loading...
       </p>
     </div>
