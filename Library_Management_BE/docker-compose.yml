@@ -1,0 +1,59 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: library_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  django:
+    build: .
+    container_name: library_container
+    ports:
+      - '8000:8000'
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+    volumes:
+      - .:/app
+    command: >
+      sh -c "
+        echo 'Waiting for MySQL...' &&
+        while ! nc -z mysql 3306; do
+          echo 'MySQL is unavailable - sleeping' &&
+          sleep 1
+        done &&
+        echo 'MySQL is ready' &&
+        echo 'Starting Django server' &&
+        python manage.py runserver 0.0.0.0:8000
+      "
+
+  adminer:
+    image: adminer
+    container_name: library_adminer
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
