@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveAPIView, DestroyAPIView, GenericAPIView
-from .models import Book, BorrowRecord
-from .serializers import BookSerializer
+from .models import Book, BorrowRecord, Author
+from .serializers import BookSerializer, AuthorSerializer, BorrowRecordSerializer
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from .role_checks import IsAdminOrLibrarian
 from django_filters.rest_framework import DjangoFilterBackend
@@ -49,6 +49,11 @@ class BookDeleteApiView(DestroyAPIView):
   permission_classes = [IsAdminUser, IsAdminOrLibrarian]
 
 
+class BookBorrowRecordListView(ListAPIView):
+  queryset = BorrowRecord.objects.all()
+  serializer_class = BorrowRecordSerializer
+  permission_classes = [IsAuthenticated, IsAdminOrLibrarian]
+
 class BookCheckoutView(GenericAPIView):
   permission_classes = [IsAuthenticated]
 
@@ -93,3 +98,29 @@ class BookReturnview(GenericAPIView):
     book.save()
 
     return Response({'message': f'You have returned "{book.title}"'}, status=status.HTTP_200_OK)
+  
+
+class AuthorListApiView(ListAPIView):
+  queryset = Author.objects.all()
+  serializer_class = AuthorSerializer
+  permission_classes = [AllowAny]
+
+class AuthorDetailApiView(RetrieveAPIView):
+  queryset = Author.objects.all()
+  serializer_class = AuthorSerializer
+  permission_classes = [AllowAny]
+
+class AuthorCreateApiView(CreateAPIView):
+  queryset = Author.objects.all()
+  serializer_class = AuthorSerializer
+  permission_classes = [IsAuthenticated, IsAdminOrLibrarian]
+
+class AuthorUpdateApiView(UpdateAPIView):
+  queryset = Author.objects.all()
+  serializer_class = AuthorSerializer
+  permission_classes = [IsAuthenticated, IsAdminOrLibrarian]
+
+class AuthorDeleteApiView(DestroyAPIView):
+  queryset = Author.objects.all()
+  serializer_class = AuthorSerializer
+  permission_classes = [IsAuthenticated, IsAdminOrLibrarian]
