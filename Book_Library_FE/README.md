@@ -107,7 +107,7 @@ The project primarily integrates with the Open Library API, leveraging endpoints
 - **Responsive Grid Layouts:** Tailwind’s grid and flex utilities create consistent layouts across screen sizes.
 
 	
-🚀 Future Improvements
+## 🚀 Future Improvements
 
 🧾 Add pagination to search results
 
