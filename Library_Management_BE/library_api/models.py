@@ -22,9 +22,11 @@ class Book(models.Model):
   year_published = models.IntegerField()
   total_copies = models.PositiveIntegerField(default=1)
   available_copies = models.IntegerField()
+  added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+  # added_by is set to on_delete=models.SET_NULL so that when a user that created the book no longer exists, the book still exists
 
   def __str__(self):
-    return (f'{self.title} by {self.author.name}')
+    return (f'{self.title} by {self.author.name}, added by {self.added_by}')
 
   
 class BorrowRecord(models.Model):

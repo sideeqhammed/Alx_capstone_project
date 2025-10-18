@@ -13,14 +13,20 @@ from django.utils import timezone
 # Create your views here.
 
 class BookListApiView(ListAPIView):
-  queryset = Book.objects.all()
   serializer_class = BookSerializer
   permission_classes = [AllowAny]
 
-  filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-  filterset_fields = ['title', 'author__name', 'year_published']
+  filter_backends = [SearchFilter, OrderingFilter]
   search_fields = ['title', 'author__name', 'isbn']
   ordering_fields = ['title', 'year_published']
+
+  def get_queryset(self):
+    queryset = Book.objects.all()
+    available = self.request.query_params.get('available')
+    if available:
+      queryset = Book.objects.filter(available_copies__gt = 0)
+    return queryset
+
 
 class BookDetailApiView(RetrieveAPIView):
   queryset = Book.objects.all()

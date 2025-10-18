@@ -6,8 +6,8 @@ urlpatterns = [
   path('', views.BookListApiView.as_view(), name='book_list'),
   path('login/', LoginView.as_view(), name='login'),
   path('logout/', LogoutView.as_view(), name='logout'),
-  path('books/<int:pk>/detail', views.BookDetailApiView.as_view(), name='book_detail'),
-  path('books/create', views.BookCreateApiView.as_view(), name='book_create'),
-  path('books/<int:pk>/update', views.BookUpdateApiView.as_view(), name='book_update'),
-  path('books/<int:pk>/delete', views.BookDeleteApiView.as_view(), name='book_delete'),
+  path('<int:pk>/detail', views.BookDetailApiView.as_view(), name='book_detail'),
+  path('create', views.BookCreateApiView.as_view(), name='book_create'),
+  path('<int:pk>/update', views.BookUpdateApiView.as_view(), name='book_update'),
+  path('<int:pk>/delete', views.BookDeleteApiView.as_view(), name='book_delete'),
 ]
