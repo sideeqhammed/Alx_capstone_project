@@ -93,7 +93,8 @@ The project primarily integrates with the Open Library API, leveraging endpoints
 /authors/{author_id}.json	Get author details
 /authors/{author_id}/works.json	Get works by an author
 /trending/daily.json or /lists	Fetch trending or recommended books
-🧠 Key Concepts
+
+## 🧠 Key Concepts
 
 - **Dynamic Routing:** Book and author pages use React Router’s useParams() to fetch data dynamically based on the URL.
 
