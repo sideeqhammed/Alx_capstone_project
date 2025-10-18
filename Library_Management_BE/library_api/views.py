@@ -1,16 +1,32 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveAPIView, DestroyAPIView, GenericAPIView
 from .models import Book, BorrowRecord, Author
 from .serializers import BookSerializer, AuthorSerializer, BorrowRecordSerializer
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from .role_checks import IsAdminOrLibrarian
-from django_filters.rest_framework import DjangoFilterBackend
+# from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 from rest_framework import status
 from django.utils import timezone
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
+
+def register (request):
+  if request.method == "POST":
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      user = form.save()
+      return redirect('login')
+  else:
+    form = UserCreationForm()
+
+  context = {'form':form}
+
+  return render(request, 'relationship_app/register.html', context)
+
+
 
 class BookListApiView(ListAPIView):
   serializer_class = BookSerializer

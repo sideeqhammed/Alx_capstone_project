@@ -3,8 +3,9 @@ from . import views
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
-  path('login/', LoginView.as_view(), name='login'),
-  path('logout/', LogoutView.as_view(), name='logout'),
+  path('login/', LoginView.as_view(template_name="library_api/login.html"), name='login'),
+  path('logout/', LogoutView.as_view(template_name="library_api/logout.html"), name='logout'),
+  path('register/', views.register(), name='register'),
   path('books/', views.BookListApiView.as_view(), name='book_list'),
   path('books/<int:pk>/detail', views.BookDetailApiView.as_view(), name='book_detail'),
   path('books/create', views.BookCreateApiView.as_view(), name='book_create'),
