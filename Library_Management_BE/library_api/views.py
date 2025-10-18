@@ -24,7 +24,7 @@ def register (request):
 
   context = {'form':form}
 
-  return render(request, 'relationship_app/register.html', context)
+  return render(request, 'library_api/register.html', context)
 
 
 
@@ -54,6 +54,9 @@ class BookCreateApiView(CreateAPIView):
   serializer_class = BookSerializer
   permission_classes = [IsAdminUser, IsAdminOrLibrarian]
 
+  def perform_create(self, serializer):
+    serializer.save(added_by=self.request.user)
+
 class BookUpdateApiView(UpdateAPIView):
   queryset = Book.objects.all()
   serializer_class = BookSerializer
@@ -71,10 +74,12 @@ class BookBorrowRecordListView(ListAPIView):
   permission_classes = [IsAuthenticated, IsAdminOrLibrarian]
 
 class BookCheckoutView(GenericAPIView):
+  queryset = BorrowRecord.objects.all()
   permission_classes = [IsAuthenticated]
+  serializer_class = BorrowRecordSerializer
 
   def post(self, request, pk):
-    try: 
+    try:
       book = Book.objects.get(pk=pk)
     except Book.DoesNotExist:
       return Response({'error' : "Book not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -95,6 +100,7 @@ class BookCheckoutView(GenericAPIView):
 
 class BookReturnview(GenericAPIView):
   permission_classes = [IsAuthenticated]
+  serializer_class = BorrowRecordSerializer
 
   def post(self, request, pk):
     try:

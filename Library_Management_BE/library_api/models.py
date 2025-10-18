@@ -8,7 +8,7 @@ from django.conf import settings
 # Create your models here.
 
 class Author(models.Model):
-  name = models.CharField(max_length=64)
+  name = models.CharField(max_length=64, unique=True)
 
   def __str__(self):
     return (f'{self.name}')
@@ -18,11 +18,11 @@ class Author(models.Model):
 class Book(models.Model):
   title = models.CharField(max_length=100)
   author = models.ForeignKey(Author, on_delete=models.CASCADE)
-  isbn = models.IntegerField(unique=True)
+  isbn = models.CharField(max_length=13, unique=True)
   year_published = models.IntegerField()
   total_copies = models.PositiveIntegerField(default=1)
-  available_copies = models.IntegerField()
-  added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+  available_copies = models.IntegerField(default=1)
+  added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='books_addedby', null=True, blank=True, editable=False)
   # added_by is set to on_delete=models.SET_NULL so that when a user that created the book no longer exists, the book still exists
 
   def __str__(self):
