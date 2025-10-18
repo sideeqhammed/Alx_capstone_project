@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
+from django.conf import settings
 # from django.contrib.auth.models import User
 # from django.db.models.signals import post_save
 # from django.dispatch import receiver
@@ -13,23 +14,28 @@ class Author(models.Model):
     return (f'{self.name}')
 
 
+
 class Book(models.Model):
   title = models.CharField(max_length=100)
   author = models.ForeignKey(Author, on_delete=models.CASCADE)
   isbn = models.IntegerField(unique=True)
   year_published = models.IntegerField()
-  copies_available = models.IntegerField()
-
-  class meta:
-    permissions = [
-      ("can_add_book", "Can add book"),
-      ("can_update_book", "Can update book"),
-      ("can_delete_book", "Can delete book"),
-    ]
+  total_copies = models.PositiveIntegerField(default=1)
+  available_copies = models.IntegerField()
 
   def __str__(self):
     return (f'{self.title} by {self.author.name}')
+
   
+class BorrowRecord(models.Model):
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+  book = models.ForeignKey(Book, on_delete=models.CASCADE)
+  checkout_date = models.DateTimeField(auto_now_add=True)
+  return_date = models.DateTimeField(null=True, blank=True)
+
+  def __str__(self):
+      return f"{self.user.username} borrowed {self.book.title}"
+
 
 class CustomUserManager(UserManager):
   def create_superuser(self, username, email, password=None, **extra_fields):
