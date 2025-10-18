@@ -118,3 +118,5 @@ The project primarily integrates with the Open Library API, leveraging endpoints
 🌙 Add light/dark mode toggle
 
 📊 Improve recommendation algorithm
+
+### 👨‍💻 Author - Sideeq Hammed
