@@ -1,11 +1,14 @@
 from django.shortcuts import render
-from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveAPIView, DestroyAPIView
-from .models import Book
+from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveAPIView, DestroyAPIView, GenericAPIView
+from .models import Book, BorrowRecord
 from .serializers import BookSerializer
-from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from .role_checks import IsAdminOrLibrarian
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.response import Response
+from rest_framework import status
+from django.utils import timezone
 
 # Create your views here.
 
@@ -38,3 +41,49 @@ class BookDeleteApiView(DestroyAPIView):
   queryset = Book.objects.all()
   serializer_class = BookSerializer
   permission_classes = [IsAdminUser, IsAdminOrLibrarian]
+
+
+class BookCheckoutView(GenericAPIView):
+  permission_classes = [IsAuthenticated]
+
+  def post(self, request, pk):
+    try: 
+      book = Book.objects.get(pk=pk)
+    except Book.DoesNotExist:
+      return Response({'error' : "Book not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    if book.available_copies <= 0:
+      return Response({'error': 'No copies available'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    already_borrowed = BorrowRecord.objects.filter(user=request.user, book=book, return_date__isnull = True).exists()
+    if already_borrowed:
+      return Response({'error' : 'You have already borrowed this book'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    BorrowRecord.objects.create(user=request.user, book=book)
+    book.available_copies -= 1
+    book.save()
+
+    return Response({'message': f'You have checked out "{book.title}"'}, status=status.HTTP_200_OK)
+  
+
+class BookReturnview(GenericAPIView):
+  permission_classes = [IsAuthenticated]
+
+  def post(self, request, pk):
+    try:
+      book = Book.objects.get(pk=pk)
+    except Book.DoesNotExist:
+      return Response({'error' : 'Book not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+    try:
+      record = BorrowRecord.objects.get(user=request.user, book=book, return_date__isnull=True)
+    except BorrowRecord.DoesNotExist:
+      return Response({'error': 'You have not borrowed this book'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    record.return_date = timezone.now()
+    record.save()
+
+    book.available_copies += 1
+    book.save()
+
+    return Response({'message': f'You have returned "{book.title}"'}, status=status.HTTP_200_OK)
