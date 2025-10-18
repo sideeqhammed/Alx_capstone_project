@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveAPIView, DestroyAPIView
 from .models import Book
-from .serializer import BookSerializer
+from .serializers import BookSerializer
 from rest_framework.permissions import AllowAny, IsAdminUser
+from .role_checks import IsAdminOrLibrarian
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 
@@ -26,14 +27,14 @@ class BookDetailApiView(RetrieveAPIView):
 class BookCreateApiView(CreateAPIView):
   queryset = Book.objects.all()
   serializer_class = BookSerializer
-  permission_classes = [IsAdminUser]
+  permission_classes = [IsAdminUser, IsAdminOrLibrarian]
 
 class BookUpdateApiView(UpdateAPIView):
   queryset = Book.objects.all()
   serializer_class = BookSerializer
-  permission_classes = [IsAdminUser]
+  permission_classes = [IsAdminUser, IsAdminOrLibrarian]
 
 class BookDeleteApiView(DestroyAPIView):
   queryset = Book.objects.all()
   serializer_class = BookSerializer
-  permission_classes = [IsAdminUser]
+  permission_classes = [IsAdminUser, IsAdminOrLibrarian]
