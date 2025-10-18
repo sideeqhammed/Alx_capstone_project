@@ -95,18 +95,15 @@ The project primarily integrates with the Open Library API, leveraging endpoints
 /trending/daily.json or /lists	Fetch trending or recommended books
 🧠 Key Concepts
 
-**Dynamic Routing:** Book and author pages use React Router’s useParams() to fetch data dynamically based on the URL.
+- **Dynamic Routing:** Book and author pages use React Router’s useParams() to fetch data dynamically based on the URL.
 
-**Asynchronous Fetching:** Data is loaded from the Open Library API using Axios inside useEffect() hooks.
+- **Asynchronous Fetching:** Data is loaded from the Open Library API using Axios inside useEffect() hooks.
 
-**State Management:** Component-level state handled via React’s useState.
+- **State Management:** Component-level state handled via React’s useState.
 
-**Conditional Rendering:** Handles loading, error, and data states gracefully.
+- **Conditional Rendering:** Handles loading, error, and data states gracefully.
 
-**Responsive Grid Layouts:** Tailwind’s grid and flex utilities create consistent layouts across screen sizes.
-
-🖼️ Screenshots (optional)
-Home Page	Book Detail
+- **Responsive Grid Layouts:** Tailwind’s grid and flex utilities create consistent layouts across screen sizes.
 
 	
 🚀 Future Improvements
