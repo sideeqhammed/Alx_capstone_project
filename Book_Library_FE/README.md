@@ -1,25 +1,25 @@
-📚 Book Library — React + Open Library API
+# 📚 Book Library — React + Open Library API
 
 A modern, responsive web app built with React and Tailwind CSS, allowing users to search for books, explore trending titles, and view detailed information such as author, publication date, subjects, and number of pages — all powered by the Open Library API.
 
-🌟 Features
+## 🌟 Features
 
-🔍 Search Books — by title, author, or publication year
+🔍 **Search Books** — by title, author, or publication year
 
-🧠 Book Details — view cover, description, author, subjects, number of pages, and publication date
+🧠 **Book Details** — view cover, description, author, subjects, number of pages, and publication date
 
-📈 Trending Books — discover popular and trending titles from Open Library
+📈 **Trending Books** — discover popular and trending titles from Open Library
 
-📑 Author Profiles — view works by specific authors
+📑 **Author Profiles** — view works by specific authors
 
-💬 Contact Page — simple contact form for user messages or feedback
+💬 **Contact Page** — simple contact form for user messages or feedback
 
-📱 Responsive Design — optimized for both mobile and desktop with Tailwind CSS
+📱 **Responsive Design** — optimized for both mobile and desktop with Tailwind CSS
 
-🎨 Clean UI — minimalist and visually appealing design with hover effects and smooth transitions
+🎨 **Clean UI** — minimalist and visually appealing design with hover effects and smooth transitions
 
 
-🧰 Tech Stack
+## 🧰 Tech Stack
 Category	Technology
 Frontend Framework	React
  (Vite setup)
@@ -29,23 +29,23 @@ HTTP Client	Axios
 
 Routing	React Router
 
-API Source	Open Library API
-⚙️ Installation & Setup
-1️⃣ Clone the Repository
+## API Source	Open Library API
+### ⚙️ Installation & Setup
+1️⃣ **Clone the Repository**
 git clone https://github.com/yourusername/book-library.git
 cd book-library
 
-2️⃣ Install Dependencies
+2️⃣ **Install Dependencies**
 npm install
 
-3️⃣ Run the Development Server
+3️⃣ **Run the Development Server**
 npm run dev
 
 
 Your app should now be live at:
 👉 http://localhost:5173
 
-🧭 Project Structure
+## 🧭 Project Structure
 book-library/
 │
 ├── src/
@@ -69,7 +69,7 @@ book-library/
 ├── tailwind.config.js
 └── README.md
 
-🔑 Environment Variables (optional)
+## 🔑 Environment Variables (optional)
 
 If you use any .env configuration (for example, future API keys or backend links):
 
@@ -82,11 +82,11 @@ And access it in code using:
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL
 
-🧩 APIs Used
+## 🧩 APIs Used
 
 The project primarily integrates with the Open Library API, leveraging endpoints such as:
 
-Endpoint	Purpose
+### Endpoint	Purpose
 /search.json?title={title}	Search books by title
 /search.json?author={author}	Search books by author
 /works/{work_id}.json	Get detailed info about a specific book
@@ -95,15 +95,15 @@ Endpoint	Purpose
 /trending/daily.json or /lists	Fetch trending or recommended books
 🧠 Key Concepts
 
-Dynamic Routing: Book and author pages use React Router’s useParams() to fetch data dynamically based on the URL.
+**Dynamic Routing:** Book and author pages use React Router’s useParams() to fetch data dynamically based on the URL.
 
-Asynchronous Fetching: Data is loaded from the Open Library API using Axios inside useEffect() hooks.
+**Asynchronous Fetching:** Data is loaded from the Open Library API using Axios inside useEffect() hooks.
 
-State Management: Component-level state handled via React’s useState.
+**State Management:** Component-level state handled via React’s useState.
 
-Conditional Rendering: Handles loading, error, and data states gracefully.
+**Conditional Rendering:** Handles loading, error, and data states gracefully.
 
-Responsive Grid Layouts: Tailwind’s grid and flex utilities create consistent layouts across screen sizes.
+**Responsive Grid Layouts:** Tailwind’s grid and flex utilities create consistent layouts across screen sizes.
 
 🖼️ Screenshots (optional)
 Home Page	Book Detail
@@ -120,11 +120,3 @@ Home Page	Book Detail
 🌙 Add light/dark mode toggle
 
 📊 Improve recommendation algorithm
-
-👨‍💻 Author
-
-Sideeq Hammed
-📍 Nigeria
-💼 Full-Stack Developer (React + Django)
-🌐 GitHub
- | LinkedIn
