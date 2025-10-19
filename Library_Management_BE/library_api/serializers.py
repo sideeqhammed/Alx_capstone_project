@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Book, Author, BorrowRecord
 from django.utils import timezone
 from django.forms import ValidationError
+from django.contrib.auth import get_user_model
 
 class BookSerializer(serializers.ModelSerializer):
   author = serializers.StringRelatedField()
@@ -31,3 +32,20 @@ class BorrowRecordSerializer(serializers.ModelSerializer):
   class Meta:
     model = BorrowRecord
     fields = '__all__'
+
+
+User = get_user_model()
+class UserCreateSerializer(serializers.ModelSerializer):
+  password = serializers.CharField(write_only=True)
+
+  def create(self, validated_data):
+    user = User.objects.create_user(
+      username=validated_data['username'],
+      email=validated_data['email'],
+      password=validated_data['password'],
+    )
+    return user
+
+  class Meta:
+    model = User
+    fields = ['username', 'email', 'password']

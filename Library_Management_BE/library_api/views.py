@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveAPIView, DestroyAPIView, GenericAPIView
 from .models import Book, BorrowRecord, Author
-from .serializers import BookSerializer, AuthorSerializer, BorrowRecordSerializer
+from .serializers import BookSerializer, AuthorSerializer, BorrowRecordSerializer, UserCreateSerializer
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from .role_checks import IsAdminOrLibrarian
 # from django_filters.rest_framework import DjangoFilterBackend
@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 
@@ -131,3 +132,10 @@ class AuthorDeleteApiView(DestroyAPIView):
   queryset = Author.objects.all()
   serializer_class = AuthorSerializer
   permission_classes = [IsAuthenticated, IsAdminUser]
+
+
+User = get_user_model()
+class UserCreateApiView(CreateAPIView):
+  queryset = User.objects.all()
+  serializer_class = UserCreateSerializer
+  permission_classes = [AllowAny]
