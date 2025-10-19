@@ -133,7 +133,7 @@ Authorization: Token your_token_here
 ### Endpoint	Method	Description	Permission
 - /library/books/	GET	List all books (with filters, pagination)	Public
 - /library/books/create/	POST	Add a new book	Admin / Librarian
-**Example:**
+    - **Example:**
 POST /library/books/create/
 {
   "title": "Django for Beginners",
@@ -148,7 +148,7 @@ POST /library/books/create/
 - /library/authors/	GET, POST	List or add authors	Public
 - /library/authors/<id>/	GET	Get book details	Public
 - /library/authors/create/	POST	Create a new Author	Admin / Librarian
-**Example:**
+    - **Example:**
 POST /library/authors/create/
 {
   "name": "J.K. Rowling"
@@ -158,14 +158,14 @@ POST /library/authors/create/
 - /library/books/book_checkout/	POST	Borrow a book	Authenticated user
 - /library/books/book_return/	POST	Return a borrowed book	Authenticated user
 - /library/auth/create_user	POST	Create a new user	Public
-- Example: 
+    - **Example:** 
 {
   "username": "johndoe",
   "email": "johndoe@example.com",
   "password": "securepassword",
 }
 - /library/auth/login/	POST	Log in and get token	Public
-- - Example:
+    - **Example:**
 {
   "username": "johndoe",
   "password": "securepassword"
