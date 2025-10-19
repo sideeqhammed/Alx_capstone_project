@@ -139,7 +139,8 @@ Authorization: Token your_token_here
   "isbn": 9781492076305,
   "year_published": 2021,
   "author": 1,
-  "total_copies": 3
+  "total_copies": 3,
+  "available_copies": 3,
 }
 - /library/books/<id>/	GET	Get book details	Public
 - /library/books/<id>/update/	PUT	Update book details	Admin / Librarian
