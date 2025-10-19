@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
-  path('auth/create', views.UserCreateApiView.as_view(), name='create_user'),
+  path('auth/create_user', views.UserCreateApiView.as_view(), name='create_user'),
   path('auth/login/', obtain_auth_token, name='api_token_auth'),
   
   path('books/', views.BookListApiView.as_view(), name='book_list'),
