@@ -134,7 +134,6 @@ Authorization: Token your_token_here
 - /library/books/	GET	List all books (with filters, pagination)	Public
 - /library/books/create/	POST	Add a new book	Admin / Librarian
     - **Example:**
-POST /library/books/create/
 {
   "title": "Django for Beginners",
   "isbn": 9781492076305,
@@ -149,7 +148,6 @@ POST /library/books/create/
 - /library/authors/<id>/	GET	Get book details	Public
 - /library/authors/create/	POST	Create a new Author	Admin / Librarian
     - **Example:**
-POST /library/authors/create/
 {
   "name": "J.K. Rowling"
 }
