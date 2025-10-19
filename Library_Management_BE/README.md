@@ -165,7 +165,7 @@ POST /library/authors/create/
   "password": "securepassword",
 }
 - /library/auth/login/	POST	Log in and get token	Public
-- Example:
+- - Example:
 {
   "username": "johndoe",
   "password": "securepassword"
