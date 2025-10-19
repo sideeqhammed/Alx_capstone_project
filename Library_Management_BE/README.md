@@ -129,9 +129,10 @@ Obtain a token by sending credentials to the login endpoint, then include it in 
 Authorization: Token your_token_here
 
 ## 🧩 API Endpoints
-Endpoint	Method	Description	Permission
-/library/books/	GET	List all books (with filters, pagination)	Public
-/library/books/create/	POST	Add a new book	Admin / Librarian
+
+### Endpoint	Method	Description	Permission
+- /library/books/	GET	List all books (with filters, pagination)	Public
+- /library/books/create/	POST	Add a new book	Admin / Librarian
 - Example:
 POST /library/books/create/
 {
