@@ -1,11 +1,11 @@
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LoginView, LogoutView
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
-  path('auth/login/', LoginView.as_view(template_name='library_api/login.html'), name='login'),
-  path('auth/logout/', LogoutView.as_view(next_page='library_api/login.html'), name='logout'),
-  path('auth/register/', views.register, name='register'),
+  path('auth/login/', obtain_auth_token, name='api_token_auth'),
+  
   path('books/', views.BookListApiView.as_view(), name='book_list'),
   path('books/<int:pk>', views.BookDetailApiView.as_view(), name='book_detail'),
   path('books/create', views.BookCreateApiView.as_view(), name='book_create'),

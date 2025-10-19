@@ -13,21 +13,6 @@ from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
-def register (request):
-  if request.method == "POST":
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-      user = form.save()
-      return redirect('login')
-  else:
-    form = UserCreationForm()
-
-  context = {'form':form}
-
-  return render(request, 'library_api/register.html', context)
-
-
-
 class BookListApiView(ListAPIView):
   serializer_class = BookSerializer
   permission_classes = [AllowAny]
@@ -52,7 +37,7 @@ class BookDetailApiView(RetrieveAPIView):
 class BookCreateApiView(CreateAPIView):
   queryset = Book.objects.all()
   serializer_class = BookSerializer
-  permission_classes = [IsAdminUser, IsAdminOrLibrarian]
+  permission_classes = [IsAuthenticated, IsAdminOrLibrarian]
 
   def perform_create(self, serializer):
     serializer.save(added_by=self.request.user)
@@ -60,12 +45,12 @@ class BookCreateApiView(CreateAPIView):
 class BookUpdateApiView(UpdateAPIView):
   queryset = Book.objects.all()
   serializer_class = BookSerializer
-  permission_classes = [IsAdminUser, IsAdminOrLibrarian]
+  permission_classes = [IsAuthenticated, IsAdminOrLibrarian]
 
 class BookDeleteApiView(DestroyAPIView):
   queryset = Book.objects.all()
   serializer_class = BookSerializer
-  permission_classes = [IsAdminUser, IsAdminOrLibrarian]
+  permission_classes = [IsAuthenticated, IsAdminUser]
 
 
 class BookBorrowRecordListView(ListAPIView):
@@ -75,7 +60,7 @@ class BookBorrowRecordListView(ListAPIView):
 
 class BookCheckoutView(GenericAPIView):
   queryset = BorrowRecord.objects.all()
-  permission_classes = [IsAuthenticated]
+  permission_classes = [IsAuthenticated, IsAdminOrLibrarian]
   serializer_class = BorrowRecordSerializer
 
   def post(self, request, pk):
@@ -99,7 +84,7 @@ class BookCheckoutView(GenericAPIView):
   
 
 class BookReturnview(GenericAPIView):
-  permission_classes = [IsAuthenticated]
+  permission_classes = [IsAuthenticated, IsAdminOrLibrarian]
   serializer_class = BorrowRecordSerializer
 
   def post(self, request, pk):
@@ -145,4 +130,4 @@ class AuthorUpdateApiView(UpdateAPIView):
 class AuthorDeleteApiView(DestroyAPIView):
   queryset = Author.objects.all()
   serializer_class = AuthorSerializer
-  permission_classes = [IsAuthenticated, IsAdminOrLibrarian]
+  permission_classes = [IsAuthenticated, IsAdminUser]

@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.forms import ValidationError
 
 class BookSerializer(serializers.ModelSerializer):
+  author = serializers.StringRelatedField()
   added_by = serializers.CharField(source='added_by.username', read_only=True)
 
   def validate(self, value):
