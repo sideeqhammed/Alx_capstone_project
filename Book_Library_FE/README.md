@@ -109,6 +109,8 @@ The project primarily integrates with the Open Library API, leveraging endpoints
 	
 ## 🚀 Future Improvements
 
+🐻 Use Zustand for better state persistence
+
 🧾 Add pagination to search results
 
 💬 Connect contact form to backend or email service
